@@ -199,6 +199,21 @@ body {
 
 .reveal small * {
   vertical-align: top; }
+  
+.reveal .bgcred {
+    text-align: right;
+    font-size: 60% !important;
+    position: absolute;
+    bottom: 0;
+    width: 100%;}
+
+.reveal .lcred {
+    text-align: left;
+    font-size: 45% !important;}
+
+.reveal .rcred {
+    text-align: right;
+    font-size: 45% !important;}  
 
 /*********************************************
  * LINKS

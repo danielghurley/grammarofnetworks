@@ -5,6 +5,10 @@
 	<title>A grammar of network methods in biology</title>
 	<link rel="stylesheet" href="css/reveal.css">
 	<link rel="stylesheet" href="css/theme/serif.css" id="theme">
+
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="lib/css/xcode.css">
+
 	<!--Add support for earlier versions of Internet Explorer -->
 	<!--[if lt IE 9]>
 	<script src="lib/js/html5shiv.js"></script>
@@ -25,7 +29,7 @@
 
 			</section>
 
-			<section data-markdown>
+			<section data-markdown id="topics">
 				<script type="text/template">
 					### Topics
 
@@ -40,23 +44,25 @@
 				</script>
 			</section>
 
-			<section data-markdown>
+					<section data-markdown data-separator="^\n---\n$" data-separator-vertical="^\n--\n$" id="introduction">
 				<script type="text/template">
 					### Introduction
 
 					Networks and network concepts are very common in cellular and molecular biology
 
-					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
+					<blockquote>
 						&ldquo;Networks have long been instrumental in representing and visualizing biological relationships. The challenge now is to transform these networks into representations that capture the multiscale modularity inherent in all biological systems.&rdquo;
 					</blockquote>
 					Ideker et al. (2013). A gene ontology inferred from molecular networks. Nature Biotechnology
 
-				</script>
-			</section>
+					--
 
-			<section data-markdown>
-				<script type="text/template">
-					### Introduction
+					<blockquote>
+						&ldquo;..network-based methodologies may be increasingly valuable entries...for the identification and mechanistic elucidation of genetic determinants of physiological and disease-related phenotypes..&rdquo;
+					</blockquote>
+					Califano et. al (2014). Identification of Causal Genetic Drivers of Human Disease through Systems-Level Analysis of Regulatory Networks. Cell
+
+					--
 
 					- And simple metrics suggest that it is still an active area of research
 					- Medline searches for 'network' show steady increase in number and relative percentage, up to about 2% in 2014
@@ -66,9 +72,54 @@
 				</script>
 			</section>
 
-			<section data-markdown>
+			<section data-markdown id="types_of_network_biology" data-separator="^\n---\n$" data-separator-vertical="^\n--\n$">
 				<script type="text/template">
-					### However
+					### 'Network' biology means a lot of different things
+
+					- Literature-based analysis
+					- Mechanistic/thermodynamic modelling
+					- Experimentation on well-characterised processes (synthetic biology)
+					- Making 'graph' models from biological data
+
+					**'modelling networks' &ne; 'network modelling'**
+
+					--
+
+					This work is about building _graph_ models to gain biological insight
+
+				</script>
+			</section>
+
+			<section data-markdown id="network_methods" data-separator="^\n---\n$" data-separator-vertical="^\n--\n$">
+				<script type="text/template">
+					### Different methods for making networks from biological data
+
+					- **Association-based** methods: network edges represent association or similarity between variables
+					- **Bayesian** methods: network edges represent conditional probabilities
+					- **Regression-based** methods (e.g. MIKANA): network edges represent terms in a system of equations
+
+
+					Key concept: the biological meaning of a network model, and of the elements within it, comes from the source data, and from the operations used to create it.
+
+				</script>
+			</section>
+
+			<section data-markdown id="best_method" data-separator="^\n---\n$" data-separator-vertical="^\n--\n$">
+				<script type="text/template">
+					### Which is the best method?
+
+					- Dialogue on Reverse Engineering Assessment and Methods (DREAM) attempts to benchmark and evaluate methods competively
+					- But different methods create networks representing quite different things
+					- Choose approaches based on a detailed understanding of the data and possible hypotheses
+
+					--
+
+					- Evaluating differences between approaches is very difficult.
+					- Current methods are designed and applied ad hoc and each uses their own idiosyncratic language
+					- The meaning of a network and its elements depends on the generating data, and on the fine detail of each step in its construction
+					- Each problem requires different applications of different methods
+
+					--
 
 					The problem of disparate approaches with different language has persisted for the last 6+ years
 
@@ -79,21 +130,375 @@
 
 					**..but we have no language to describe the 'details of implementation'!**
 
+					--
+
+					### The consequences
+
+					- Lots of methods, but few principles
+					- We can make complex mathematical objects
+					- But we cannot reason from the details of their construction, to their meaning
+					- We know more data will improve things..
+					- But we can't say what 'improvement' means in biological terms
+
+					**Progress since 2006 has been slower than expected**
 
 				</script>
 			</section>
 
+			<section data-markdown id="not_a_network" data-separator="^\n---\n$" data-separator-vertical="^\n--\n$">
+				<script type="text/template">
+					### Not a network
 
-			<section id="show-a-link">
-				<h1>Show a live link</h1>
-				<p>Slide 2 discussed here</p>
-				<p>See <a href="http://www.htmlcheats.com">HTMLCheats.com</a><p>
+					(Magritte picture here)
+
+					--
+
+					### Not a network
+
+					- In this description, a 'network' is a 'graph model' built from biological data
+					- We are interested in the relationship between _graph properties_ and _biological meaning_
+
+					</script>
 			</section>
 
-			<section>
-				<h1>Slide 3</h1>
-				<p>How does one revisit an arbitrary slide in code?</p>
-				<p>Visit internal slide<a href="#/show-a-link"> 2</a>
+			<section data-markdown id="uncovering_meaning" data-separator="^\n---\n$" data-separator-vertical="^\n--\n$">
+				<script type="text/template">
+					### Uncovering meaning
+
+					How do we uncover meaning in language?
+
+					_&iquest;Donde esta el zapateria?_
+
+					--
+
+					### But then
+
+					I began to understand the **grammar**
+
+					_&iquest;Donde esta el zapateria?_
+
+					Where is &emsp; the shoestore?
+
+					--
+
+					### Concept of a grammar
+					- A set of principles that govern the construction and interpretation of phrases
+					- Meaning (semantics) arises from context (situation) and syntax (rules that govern the structure of sentences)
+					- Two ways to get to semantics from context and syntax: formal, and empirical
+
+					--
+
+					### So
+					To get to _biological_ meaning from networks, we need a **grammar of graph methods**
+
+					</script>
+			</section>
+
+			<section data-markdown id="a_grammar_of_graph_methods_1" data-separator="^\n---\n$" data-separator-vertical="^\n--\n$">
+				<script type="text/template">
+					### A grammar of graph methods
+
+					Find common features in all network methods
+
+					Work out a language to describe them
+
+					- Must be general enough to be comprehensive (able to describe all analyses of this type
+					- But specific enough to be useful (able to provide meaningful insight)
+
+					--
+
+					### The focus
+
+					Three common steps:
+
+					1.Data -> Graph
+
+					2.Graph -> Graph
+
+					3.Graph (element) -> Hypothesis
+
+					--
+
+					### Influenced by previous work
+					- Wilkinson, L. (2010). The grammar of graphics.
+					- Wickham, H. (2008). ggplot2: an Implementation of the Grammar of Graphics.
+					- [Wickham, H. dplyr: A Grammar of Data Manipulation](http://cran.r-project.org/web/packages/dplyr/index.html)
+					- Declarative SQL-type syntax - this is a specification, so it must describe what things are
+					- [Cypher](http://neo4j.com/developer/cypher/), the graph language for Neo4j:
+					- [Gremlin](https://github.com/tinkerpop/gremlin/wiki), a graph traversal language
+
+					--
+
+					### But quite different
+
+					1.Focus on process, not data visualisation
+
+					2.Not a data standard (e.g. 'minimum information')
+
+					3.Not an ontology/controlled vocabulary - represents process, not knowledge.  Syntax carries meaning
+
+					4.Divisions, syntax and vocabulary are completely new
+
+					--
+
+					## Empirical grammar, not formal grammar
+					_(translation: constructed by observation and experiment)_
+
+					</script>
+				</section>
+
+				<section data-markdown id="a_grammar_of_graph_methods_2" data-separator="^\n---\n$" data-separator-vertical="^\n--\n$">
+					<script type="text/template">
+						### A grammar of graph methods
+
+						- Elements (nouns)
+
+						- Operators (verbs)
+
+						--
+
+						'Parts of speech'
+
+						1.Data -> Graph
+
+						2.Graph -> Graph
+
+						3.Graph (element) -> Hypothesis
+
+						--
+
+						'Sentences' represent analyses
+
+						--
+
+						Expressing analyses using a structured grammar lets us:
+
+						1.Recognise difference and similarity between approaches
+
+						2.Link biological conclusions to the details of an analysis
+
+						**-> no more black boxes**
+						</script>
+				</section>
+
+				<section data-markdown id="datatrans" data-separator="^\n---\n$" data-separator-vertical="^\n--\n$">
+					<script type="text/template">
+						### Data -> Graph
+						DATATRANS
+
+						Put data in 'long' format - less intuitive for non-statisticians, but allows us to be really precise about preprocessing and data manipulation _before_ building a network.  A very good example in R is [dplyr](http://cran.r-project.org/web/packages/dplyr/index.html).
+
+						What do we need to make a graph?
+
+						1.Index variable
+
+						2.Generative element
+
+						3.Operation
+
+						--
+
+						### DATATRANS: Index variable
+
+						The _index variable_ is the variable that differentiates nodes in the network
+
+						It partitions the dataset
+
+						Examples: probeID/protein ID for transcriptomic/proteomic
+						networks, or metabolite ID for metabolic networks
+
+						Typically not unique in 'long' format data (multiple observations)
+						Always unique in the network (because each node is different)
+
+						--
+
+						### DATATRANS: Generative element
+
+						The generative element is the smallest part of the graph required to build the network
+
+						Get the partitioned data associated with each generative element
+
+						New result: methods with the same generative element respond in a similar way to changes in the data
+
+						--
+
+						### DATATRANS: Generative element
+
+						What is the *generative element* for an association network (e.g. ARACNE/CLR/WCGNA)?
+
+						Answer: the edge
+
+						--
+
+						### DATATRANS: Generative element
+
+						What is the *generative element* for a dynamical systems network?
+
+						Answer: the *subgraph*
+
+						Different ge = different response to changes in data
+
+						--
+
+						### DATATRANS: Operation
+
+						- The operation is performed on the data associated with the generative element
+						- It returns a property (scalar or vector) which gets assigned to the generative  element
+
+
+						</script>
+				</section>
+
+			<section data-markdown id="graphtrans" data-separator="^\n---\n$" data-separator-vertical="^\n--\n$">
+					<script type="text/template">
+						### Graph -> Graph
+						GRAPHTRANS
+
+						- Often several steps in an analysis
+						- Typically feature one or more _select()_ and _group_by_ operations
+						- _summarise()_ allows us to choose from a graph set
+						- Literature networks start at this point
+
+					</script>
+			</section>
+
+			<section data-markdown id="assert" data-separator="^\n---\n$" data-separator-vertical="^\n--\n$">
+					<script type="text/template">
+						### Graph -> Hypothesis
+						ASSERT
+
+						- Assertions involve some properties of a graph element, and some other data
+						- We often use select() %.% filter() to get the element
+						- Often downstream computation outside the grammar
+
+					</script>
+			</section>
+
+			<section data-markdown id="together" data-separator="^\n---\n$" data-separator-vertical="^\n--\n$">
+					<script type="text/template">
+					### Putting it all together
+
+					<pre><code class="hljs" data-trim contenteditable>
+					DATATRANS{index('probeID')
+					ge('edge'),
+					operation('mi','value'))}
+					GRAPHTRANS{select ('edges') %.%
+					filter %.%
+					select ('triplets') %.%
+					filter}
+					ASSERT{select ('edges') %.%
+					filter}</code></pre>
+
+					--
+
+					## Some examples
+
+					--
+
+					Califano, Iavarone et al. Nature (2010)
+					EMT in glioma
+
+					<pre><code class="hljs" data-trim contenteditable>
+					ge('edge'), operation('mi')
+					select ('edges') %.%, filter
+					select ('triplets') %.%, filter
+					group_by(graph set,'edge') %.%, summarise('count')
+					select('edges') %.%, filter
+					</code></pre>
+					<p class="rcred"><a href="http://commons.wikimedia.org/wiki/File:Sun_poster.svg">Carro, M. S., Lim, W. K., Alvarez, M. J., Bollo, R. J., Zhao, X., Snyder, E. Y., Iavarone, A. (2010). The transcriptional network for mesenchymal transformation of brain tumours. Nature, 463(7279), 318-25. doi:10.1038/nature08712</a></p>
+
+					--
+
+					Ideker et al. Science (2010)
+					Differential network analysis
+
+					<pre><code class="hljs" data-trim contenteditable>
+					ge('edge'), operation('interaction_score > +/-2.0')
+					group_by(graph set,'edge') %.%
+					summarise('count')
+					select('all edges') %.%
+					filter
+					</code></pre>
+					<p class="rcred"><a href="http://commons.wikimedia.org/wiki/File:Sun_poster.svg">Bandyopadhyay, S., Mehta, M., Kuo, D., Sung, M.-K., Chuang, R., Jaehnig, E. J., Ideker, T. (2010). Rewiring of genetic networks in response to DNA damage. Science (New York, N.Y.), 330, 1385-1389. doi:10.1126/science.1195618</a></p>
+
+					--
+
+					Alon et al. Nature Genetics (2002)
+					Persistent network motifs
+
+					<pre><code class="hljs" data-trim contenteditable>
+					select('motif') %.%
+					filter
+					group_by(graph set,'edge') %.%
+					summarise('count')
+					select('edges.count') %.%
+					filter
+					</code></pre>
+					<p class="rcred"><a href="http://commons.wikimedia.org/wiki/File:Sun_poster.svg">Shen-Orr, S. S., Milo, R., Mangan, S., & Alon, U. (2002). Network motifs in the transcriptional regulation network of Escherichia coli. Nature Genetics, 31(1), 64-68. doi:10.1038/ng881</a></p>
+
+					</script>
+
+			</section>
+
+			<section data-markdown id="recap" data-separator="^\n---\n$" data-separator-vertical="^\n--\n$">
+					<script type="text/template">
+						### Recap of results
+
+						- The grammar unifies work which appears different
+						- Complete and explicit specification of methods
+						- Concept of the 'generative element' makes clear what data is responsible for what elements
+						- New result: different generative element = different response to data changes
+						- The grammar allows us to work backward, as well as forward, through an analysis
+						- Key point: understanding syntax helps us get to meaning in a principled way
+
+					</script>
+			</section>
+
+			<section data-markdown id="implementation" data-separator="^\n---\n$" data-separator-vertical="^\n--\n$">
+					<script type="text/template">
+						### Recap of results
+
+						- This is a practical tool as well as a conceptual framework
+						- We have embedded the grammar in a [domain-specific language](https://en.wikipedia.org/wiki/Domain-specific_language)
+						- Prototype implementation running in R, extend into Python, based on the [igraph](http://igraph.org/redirect.html) library
+						- Construct analyses directly using the grammar
+
+						--
+
+						### Work in progress:
+						- Inheritance of properties
+						- Iterators for common tasks (shortcuts)
+						- Store the generative history of elements
+						- Caching layer
+						- Forward chaining (infix) operators (= pipes)
+
+					</script>
+			</section>
+
+
+			<section data-markdown id="conclusion" data-separator="^\n---\n$" data-separator-vertical="^\n--\n$">
+					<script type="text/template">
+						### Finally
+
+						- The grammar fills a specific gap in network biology
+						- Conventional graph theory doesn't: it starts with a graph, and focuses mostly on traversals
+						- Computational biology generally doesn't: it treats each method as a separate entity
+						- Draw results directly relevant to experimentation
+
+					</script>
+			</section>
+
+			<section data-markdown id="resources" data-separator="^\n---\n$" data-separator-vertical="^\n--\n$">
+					<script type="text/template">
+						### Further resources
+
+						[Systems Biology Lab website](http://uomsystemsbiology.github.io/)
+
+						Detailed explanation via ArXiV
+
+						Prototype R package
+
+					</script>
 			</section>
 
 			</div>
@@ -121,6 +526,8 @@
 					{ src: 'plugin/notes/notes.js', async: true }
 				]
 			});
+			Reveal.configure({ slideNumber: 'c' });
+
 	</script>
 </body>
 </html>
