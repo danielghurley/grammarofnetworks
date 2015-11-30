@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<title>A grammar of network methods in biology</title>
 	<link rel="stylesheet" href="css/reveal.css">
-	<link rel="stylesheet" href="css/theme/night.css" id="theme">
+	<link rel="stylesheet" href="css/theme/night_grammarofnetworks.css" id="theme">
 
 	<!-- Code syntax highlighting -->
 	<link rel="stylesheet" href="lib/css/xcode.css">
@@ -53,35 +53,93 @@
 					<blockquote>
 						&ldquo;Networks have long been instrumental in representing and visualizing biological relationships. The challenge now is to transform these networks into representations that capture the multiscale modularity inherent in all biological systems.&rdquo;
 					</blockquote>
-					<p class="rcred">Ideker et al. (2013). A gene ontology inferred from molecular networks. Nature Biotechnology</p>
+					<p class="rcred">[Ideker et al. (2013). A gene ontology inferred from molecular networks. Nature Biotechnology](http://dx.doi.org/10.1038/nbt.2463)</p>
 
 					--
 
 					<blockquote>
 						&ldquo;..network-based methodologies may be increasingly valuable entries...for the identification and mechanistic elucidation of genetic determinants of physiological and disease-related phenotypes..&rdquo;
 					</blockquote>
-					<p class="rcred">Califano et. al (2014). Identification of Causal Genetic Drivers of Human Disease through<br>Systems-Level Analysis of Regulatory Networks. Cell</p>
+					<p class="rcred">[Califano et. al (2014). Identification of Causal Genetic Drivers of Human Disease through<br>Systems-Level Analysis of Regulatory Networks. Cell](http://dx.doi.org/10.1016/j.cell.2014.09.021)</p>
 
 					--
 
-					- And simple metrics suggest that it is still an active area of research
-					- Medline searches for 'network' show steady increase in number and relative percentage, up to about 2% in 2014
-					- Searches for 'network' in Nature Group publications from 2006-2014 show steady increase.
-					- Subjectively we have seen high-profile publications from 2006 onward - Califano, the DREAM consortium, Barabasi, Uri Alon, etc.
+					<div width:30% style="float: right; margin: 0 0 20px 20px">
+						<table>
+						  <tr>
+							<th>Year</th>
+							<th>Publications</th>
+						  </tr>
+						  <tr>
+							<td>2006</td>
+							<td>295</td>
+						  </tr>
+						  <tr>
+							<td>2007</td>
+							<td>325</td>
+						  </tr>
+						  <tr>
+							<td>2008</td>
+							<td>327</td>
+						  </tr>
+						  <tr>
+							<td>2009</td>
+							<td>355</td>
+						  </tr>
+						  <tr>
+							<td>2010</td>
+							<td>367</td>
+						  </tr>
+						  <tr>
+							<td>2011</td>
+							<td>423</td>
+						  </tr>
+						  <tr>
+							<td>2012</td>
+							<td>492</td>
+						  </tr>
+						  <tr>
+							<td>2013</td>
+							<td>642</td>
+						  </tr>
+						</table>
+						<p class="rcred"><i>Nature Group publications<br> containing 'network' by year</i></p>
+						</div>
 
-				</script>
+					<div width:40% style="overflow: hidden">
+					<ul>
+						<li>And basic metrics suggest that it is an active area of research</li>
+						<li>Medline searches for 'network' show steady increase in number and relative percentage, up to about 2% in 2014</li>
+						<li>Searches for 'network' in Nature Group publications from 2006-2014 show steady increase.</li>
+						<li>Subjectively we have seen high-profile publications from 2006 onward - Califano, the DREAM consortium, Barabasi, Uri Alon, etc.</li>
+					</ul>
+					</div>
+
+					</script>
+
+
 			</section>
 
 			<section data-markdown id="types_of_network_biology" data-separator="^\n---\n$" data-separator-vertical="^\n--\n$">
 				<script type="text/template">
-					### 'Network' biology means a lot of different things
+					### 'Network' biology can describe <br> different things
 
-					- Literature-based analysis
-					- Mechanistic/thermodynamic modelling
-					- Experimentation on well-characterised processes (synthetic biology)
-					- Making 'graph' models from biological data
+					<div style="float: right; margin: 0 0 10px 10px; width:15%; line-height:10px;">
+					<span class="fragment"><img src="images/bond_graph.png"></span>
+					<span class="fragment"><img src="images/Abstraction_hierarchy.jpg"></span>
+					<span class="fragment"><img src="images/ipa.png"></span>
+					</div>
 
-					**'modelling networks' &ne; 'network modelling'**
+					<div style="overflow: hidden; height:100%">
+					<ul>
+						<li style="margin-bottom:15px">Mechanistic modelling of known processes (e.g. [cell-cycle](http://dx.doi.org/10.1016/j.cell.2015.02.032), [glycogenolysis](http://arxiv.org/abs/1503.01814))</li>
+						<li style="margin-bottom:15px">Experimentation on known processes (e.g. [synthetic biology](https://en.wikipedia.org/wiki/Synthetic_biology))</li>
+						<li style="margin-bottom:15px">Analysing interactions from literature (e.g. [IPA](http://www.ingenuity.com), [Reactome](http://www.reactome.org/), [STRING](http://string-db.org/))</li>
+						<li style="margin-bottom:15px">Making 'graph' models from biological data</li>
+					</ul>
+					</div>
+
+					<p class="fragment highlight-red">**'modelling networks' &ne; 'network modelling'**</p>
 
 					--
 
@@ -94,12 +152,26 @@
 				<script type="text/template">
 					### Different methods for making networks from biological data
 
-					- **Association-based** methods: network edges represent association or similarity between variables
-					- **Bayesian** methods: network edges represent conditional probabilities
-					- **Regression-based** methods (e.g. MIKANA): network edges represent terms in a system of equations
+					--
 
+					<span class="fragment highlight-red">**Association-based**</span> methods: network edges represent association or similarity between variables
 
-					Key concept: the biological meaning of a network model, and of the elements within it, comes from the source data, and from the operations used to create it.
+					<span class="fragment"><img src="images/correlation.png" width="50%"></span>
+
+					--
+
+					<span class="fragment highlight-red">**Bayesian**</span> methods: network edges represent conditional probabilities
+
+					--
+
+					<span class="fragment highlight-red">**Regression-based**</span>  methods (e.g. MIKANA): network edges represent terms in a system of equations
+
+					--
+
+					Key concept: the _biological_ meaning of a network model comes from:
+
+					<span class="fragment">1. The source data</span><br>
+					<span class="fragment">2. The operations used to make it</span>
 
 				</script>
 			</section>
@@ -501,6 +573,25 @@
 						<p style="text-align: left"><a href="#start"> Back to start </a></p>
 
 					</script>
+			</section>
+
+					<section>
+								<h3>Acknowledgements</h3>
+
+					<table>
+					  <tr>
+						<td><b>Systems Biology Lab<br>University of Melbourne</b><br>Prof Edmund Crampin<br>Dr Melissa Davis<br>Dr Joe Cursons<br>David Budden<br>Michael Pan</td>
+						<td><b>Regulators of melanoma<br>proliferation project</b><br>Prof Cristin Print<br>Dr Anita Muthukaruppan<br>Dr Li Wang<br>Dr Sunali Mehta</td>
+					  </tr>
+					  <tr>
+						<td><b>Funding sources</b><br>University of Auckland, Faculty of<br>Medical and Health Sciences<br>Maurice Wilkins Centre<br>New Zealand Genomics Ltd<br>NZ Health Research Council<br>NZ Marsden Fund<br>Auckland District Health Board</td>
+						<td><b>Drug mechanism of action project</b><br>Prof Bill Wilson<br>Dr Frederik Pruijn<br>Dr Moana Tercel<br>Francis Hunter</td>
+					  </tr>
+					  <tr>
+						<td><b>Structural insight into endothelial<br>cell regulation project</b><br>Prof Cristin Print<br>Prof Satoru Miyano<br>Dr Stephen Charnock-Jones<br>Dr Muna Affara<br>Dr Yoshinori Tamada<br>Dr Hiromitsu Araki<br>Sally Humphreys</td>
+						<td></td>
+					  </tr>
+				</table>
 			</section>
 
 			</div>
